@@ -1,0 +1,14 @@
+Import this project into eclipse.
+
+1. you need to go through GCM setup: http://developer.android.com/google/gcm/gs.html, store project number in android app (take a look at DemoActivity.java, SEND_ID field), then add API key in airnotifier admin panel
+2. The android app requires external jars, so you need to take a look at http://developer.android.com/google/gcm/client.html and add google play services jars to the project
+3. The interesting part is GcmIntentService.onHandleIntent method, it extract the notification posted from AirNotifier, same as iOS platform, we use alert for notification message, additionally, android could process more params, just send all them to /notification/ endpoint
+
+It's possible to run it in emulator, I did that on a physical device, please note you need to obtain the device registration id (known as token on iOS) from the LogCat console (set filter to tag:GCM) before sending messages from AirNotifier.
+
+
+On AirNotifier side:
+1. Run upgrade.py script (backup existing mongodb data  of course)
+2. /notification/ endpoint requires device param, if not supplied, it would be considered to be an ios device
+3. please use 'moodle' branch on github, it has moodle specific changes
+
